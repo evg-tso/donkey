@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,13 @@ package com.appsflyer.donkey;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class VertxFactory {
-  
-  private static final Logger logger = LoggerFactory.getLogger(VertxFactory.class.getName());
-  
-  private VertxFactory() {}
   
   public static Vertx create(VertxOptions opts) {
     return Vertx.vertx(opts)

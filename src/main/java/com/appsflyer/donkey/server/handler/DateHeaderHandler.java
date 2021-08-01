@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ package com.appsflyer.donkey.server.handler;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.RoutingContext;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,6 +29,7 @@ import java.util.function.Supplier;
 /**
  * Handler that adds a {@code Date} header to the response.
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DateHeaderHandler implements Handler<RoutingContext>, PeriodicTask, Supplier<String> {
   
   private static final String DATE_HEADER = "Date";
@@ -36,10 +39,6 @@ public final class DateHeaderHandler implements Handler<RoutingContext>, Periodi
   
   public static DateHeaderHandler create(Vertx vertx) {
     return new DateHeaderHandler(vertx).start();
-  }
-  
-  private DateHeaderHandler(Vertx vertx) {
-    this.vertx = vertx;
   }
   
   @Override
@@ -69,6 +68,4 @@ public final class DateHeaderHandler implements Handler<RoutingContext>, Periodi
   private void update(Long timerId) {
     date = DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now());
   }
-  
 }
-

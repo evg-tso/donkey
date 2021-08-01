@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ import io.netty.handler.codec.http.QueryStringDecoder;
 import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.ext.web.multipart.MultipartForm;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,11 +35,10 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class TypeConverter {
   
   private static final Function<String, String> STRING_IDENTITY = Function.identity();
-  
-  private TypeConverter() {}
   
   /**
    * @return Comma separated string of all the elements in the iterable

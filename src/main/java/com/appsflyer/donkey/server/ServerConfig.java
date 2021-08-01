@@ -22,139 +22,57 @@ import com.appsflyer.donkey.server.route.RouteCreatorFactory;
 import com.appsflyer.donkey.server.route.RouteList;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerOptions;
-
-import java.util.Objects;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 /**
  * Configuration object used for initializing a {@link Server}.
- * Use {@link ServerConfigBuilder} to create instances.
+ * Use {@link #builder()} to create instances.
  */
+@Builder
+@Accessors(fluent = true)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ServerConfig {
   
-  public static ServerConfigBuilder builder() {
-    return new ServerConfigBuilder();
-  }
-  
+  @Getter
+  @NonNull
   private Vertx vertx;
+  
+  @Getter(AccessLevel.PACKAGE)
+  @NonNull
   private HttpServerOptions serverOptions;
+  
+  @Getter
+  @NonNull
   private RouteCreatorFactory routeCreatorFactory;
+  
+  @Getter
+  @NonNull
   private RouteList routeList;
+  
+  @Getter(AccessLevel.PACKAGE)
   private ErrorHandler<?> errorHandler;
+  
+  @Getter
   private int instances;
+  
+  @Getter(AccessLevel.PACKAGE)
   private boolean addDateHeader;
+  
+  @Getter(AccessLevel.PACKAGE)
   private boolean addContentTypeHeader;
+  
+  @Getter(AccessLevel.PACKAGE)
   private boolean addServerHeader;
   
-  private ServerConfig() {}
-  
-  public Vertx vertx() {
-    return vertx;
-  }
-  
-  HttpServerOptions serverOptions() {
-    return serverOptions;
-  }
-  
-  public RouteCreatorFactory routeCreatorFactory() {
-    return routeCreatorFactory;
-  }
-  
-  public RouteList routeList() {
-    return routeList;
-  }
-  
-  ErrorHandler<?> errorHandler() {
-    return errorHandler;
-  }
-  
-  public int instances() {
-    return instances;
-  }
-  
-  boolean addDateHeader() {
-    return addDateHeader;
-  }
-  
-  boolean addContentTypeHeader() {
-    return addContentTypeHeader;
-  }
-  
-  boolean addServerHeader() {
-    return addServerHeader;
-  }
-  
-  public static final class ServerConfigBuilder {
-    
-    public static ServerConfigBuilder create() {
-      return new ServerConfigBuilder();
-    }
-    
-    private ServerConfig instance;
-    
-    private ServerConfigBuilder() {
-      instance = new ServerConfig();
-    }
-    
-    public ServerConfigBuilder vertx(Vertx vertx) {
-      instance.vertx = vertx;
-      return this;
-    }
-    
-    public ServerConfigBuilder serverOptions(HttpServerOptions serverOptions) {
-      instance.serverOptions = serverOptions;
-      return this;
-    }
-  
-    public ServerConfigBuilder routeCreatorFactory(RouteCreatorFactory routeCreatorFactory) {
-      instance.routeCreatorFactory = routeCreatorFactory;
-      return this;
-    }
-  
-    public ServerConfigBuilder routeList(RouteList routeList) {
-      instance.routeList = routeList;
-      return this;
-    }
-  
-    public ServerConfigBuilder errorHandler(ErrorHandler<?> errorHandler) {
-      instance.errorHandler = errorHandler;
-      return this;
-    }
-  
-    public ServerConfigBuilder instances(int val) {
-      instance.instances = val;
-      return this;
-    }
-    
-    public ServerConfigBuilder addDateHeader(boolean val) {
-      instance.addDateHeader = val;
-      return this;
-    }
-    
-    public ServerConfigBuilder addContentTypeHeader(boolean val) {
-      instance.addContentTypeHeader = val;
-      return this;
-    }
-    
-    public ServerConfigBuilder addServerHeader(boolean val) {
-      instance.addServerHeader = val;
-      return this;
-    }
+  public static class ServerConfigBuilder {
     
     public ServerConfig build() {
-      assertValidState();
-      var res = instance;
-      instance = null;
-      return res;
-    }
-    
-    private void assertValidState() {
-      Objects.requireNonNull(instance.vertx, "Vertx instance is missing");
-      Objects.requireNonNull(instance.serverOptions, "Server options is missing");
-      Objects.requireNonNull(instance.routeCreatorFactory, "Route creator factory is missing");
-      Objects.requireNonNull(instance.routeList, "Route definition list is missing");
-      if (instance.instances < 1) {
+      if (instances < 1) {
         throw new IllegalArgumentException("Number of instances must be greater than 0");
       }
+      
+      return new ServerConfig(vertx, serverOptions, routeCreatorFactory, routeList, errorHandler, instances, addDateHeader, addContentTypeHeader, addServerHeader);
     }
   }
 }

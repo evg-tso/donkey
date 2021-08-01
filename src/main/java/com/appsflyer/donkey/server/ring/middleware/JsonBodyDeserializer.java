@@ -20,12 +20,14 @@ package com.appsflyer.donkey.server.ring.middleware;
 import clojure.lang.IPersistentMap;
 import com.appsflyer.donkey.server.exception.DeserializationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
 import java.util.Objects;
 
 import static com.appsflyer.donkey.server.ring.handler.RingRequestField.BODY;
 
+@RequiredArgsConstructor
 public final class JsonBodyDeserializer implements RingMiddleware {
   
   public static RingMiddleware create(ObjectMapper mapper) {
@@ -33,10 +35,6 @@ public final class JsonBodyDeserializer implements RingMiddleware {
   }
   
   private final ObjectMapper mapper;
-  
-  private JsonBodyDeserializer(ObjectMapper mapper) {
-    this.mapper = mapper;
-  }
   
   @SuppressWarnings("OverlyBroadCatchBlock")
   @Override

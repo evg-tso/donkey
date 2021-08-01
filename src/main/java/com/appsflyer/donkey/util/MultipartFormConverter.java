@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -20,13 +20,14 @@ package com.appsflyer.donkey.util;
 import clojure.lang.IMapEntry;
 import clojure.lang.IPersistentMap;
 import io.vertx.ext.web.multipart.MultipartForm;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NonNls;
 
 import java.util.Objects;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MultipartFormConverter {
-  
-  private MultipartFormConverter() {}
   
   public static MultipartForm from(IPersistentMap map) {
     Objects.requireNonNull(map, "Cannot convert a null map to MultipartForm");

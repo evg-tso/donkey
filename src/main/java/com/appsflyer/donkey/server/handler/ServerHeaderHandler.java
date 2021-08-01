@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,13 @@ package com.appsflyer.donkey.server.handler;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 /**
  * Handler that adds a {@code Server} header to the response
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ServerHeaderHandler implements Handler<RoutingContext> {
   
   private static final String SERVER_PROP = "Server";
@@ -32,12 +35,9 @@ public final class ServerHeaderHandler implements Handler<RoutingContext> {
     return new ServerHeaderHandler();
   }
   
-  private ServerHeaderHandler() {}
-  
   @Override
   public void handle(RoutingContext ctx) {
     ctx.addHeadersEndHandler(v -> ctx.response().putHeader(SERVER_PROP, SERVER_NAME));
     ctx.next();
   }
-  
 }

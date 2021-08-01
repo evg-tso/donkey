@@ -23,7 +23,7 @@ import io.vertx.ext.web.handler.StaticHandler;
 
 /**
  * Handler used to serve static assets.
- * It is recommend to use it rather than writing your own handler because
+ * It is recommended to use it rather than writing your own handler because
  * it handles caching file system properties and cache negotiation with client.
  */
 public final class StaticResourcesHandler implements Handler<RoutingContext> {
@@ -66,5 +66,4 @@ public final class StaticResourcesHandler implements Handler<RoutingContext> {
   public void handle(RoutingContext ctx) {
     impl.handle(ctx);
   }
-  
 }

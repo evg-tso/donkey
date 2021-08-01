@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ package com.appsflyer.donkey;
 
 import clojure.lang.*;
 import io.vertx.core.Future;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -52,6 +54,7 @@ import java.util.concurrent.TimeoutException;
  *
  * @param <T>
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public final class FutureResult<T> implements CompletableResult<T>, IDeref, IBlockingDeref {
   
   private final CompletableFuture<Object> impl;
@@ -75,10 +78,6 @@ public final class FutureResult<T> implements CompletableResult<T>, IDeref, IBlo
         .onFailure(impl::completeExceptionally);
   
     return new FutureResult<>(impl);
-  }
-  
-  private FutureResult(CompletableFuture<Object> impl) {
-    this.impl = impl;
   }
   
   @Override

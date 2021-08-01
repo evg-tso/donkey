@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -22,17 +22,15 @@ import com.appsflyer.donkey.server.router.RouterFactoryImpl;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.ext.web.Router;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class ServerVerticle extends AbstractVerticle {
   
-  private static final Logger logger = LoggerFactory.getLogger(ServerVerticle.class.getName());
   private final ServerConfig config;
-  
-  ServerVerticle(ServerConfig config) {
-    this.config = config;
-  }
   
   @Override
   public void start(Promise<Void> promise) {

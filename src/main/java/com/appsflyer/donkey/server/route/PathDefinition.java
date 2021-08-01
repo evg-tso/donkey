@@ -16,6 +16,11 @@
 
 package com.appsflyer.donkey.server.route;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
+
 /**
  * Represents a path on a {@link io.vertx.ext.web.Route}.
  * A path has a value, e.g {@code /} or {@code /foo/bar},
@@ -33,6 +38,9 @@ package com.appsflyer.donkey.server.route;
  * expression, e.g {@code /user/[0-9]+} in which case the path will match only
  * if the part after {@code /user/} includes one or more numbers.
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
+@Accessors(fluent = true)
 public final class PathDefinition {
   
   public static PathDefinition create(String value) {
@@ -46,24 +54,9 @@ public final class PathDefinition {
   private final String value;
   private final MatchType matchType;
   
-  private PathDefinition(String value, MatchType matchType) {
-    this.value = value;
-    this.matchType = matchType;
-  }
-  
   private PathDefinition(String value) {
     this(value, MatchType.SIMPLE);
   }
-  
-  public String value() {
-    return value;
-  }
-  
-  @SuppressWarnings("WeakerAccess")
-  public MatchType matchType() {
-    return matchType;
-  }
-  
   
   public enum MatchType {
     REGEX, SIMPLE

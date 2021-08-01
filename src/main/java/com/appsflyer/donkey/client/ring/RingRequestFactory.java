@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.client.HttpRequest;
 import io.vertx.ext.web.client.WebClient;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Objects;
 
@@ -31,6 +33,7 @@ import static com.appsflyer.donkey.client.ring.ClojureRequestField.*;
 /**
  * A factory that constructs an {@link HttpRequest} from a Clojure map.
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RingRequestFactory implements RequestFactory<IPersistentMap> {
   
   public static RingRequestFactory create(WebClient client) {
@@ -38,10 +41,6 @@ public final class RingRequestFactory implements RequestFactory<IPersistentMap> 
   }
   
   private final WebClient client;
-  
-  private RingRequestFactory(WebClient client) {
-    this.client = client;
-  }
   
   @Override
   public HttpRequest<Buffer> create(IPersistentMap opts) {

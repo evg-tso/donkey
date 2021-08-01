@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@
 package com.appsflyer.donkey.server.ring.handler;
 
 import io.vertx.ext.web.RoutingContext;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import static com.appsflyer.donkey.util.TypeConverter.toPersistentMap;
 
@@ -27,13 +29,12 @@ import static com.appsflyer.donkey.util.TypeConverter.toPersistentMap;
  * <p></p>
  * See the Ring <a href="https://github.com/ring-clojure/ring/blob/master/SPEC">specification</a> for more details.
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RingRequestAdapter implements RingHandler {
   
   public static RingHandler create() {
     return new RingRequestAdapter();
   }
-  
-  private RingRequestAdapter() {}
   
   @Override
   public void handle(RoutingContext ctx) {

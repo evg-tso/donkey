@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -18,28 +18,25 @@
 package com.appsflyer.donkey.server.ring.middleware;
 
 import clojure.lang.*;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Objects;
 
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public final class FormParamsKeywordizer implements RingMiddleware {
   
   public static RingMiddleware create(Options options) {
     return new FormParamsKeywordizer(options);
   }
   
+  @RequiredArgsConstructor
   public static class Options {
-    
     private final boolean deep;
-    
-    public Options(boolean deep) {this.deep = deep;}
   }
   
   private static final Keyword FORM_PARAMS = Keyword.intern("form-params");
   private final Options options;
-  
-  private FormParamsKeywordizer(Options options) {
-    this.options = options;
-  }
   
   @Override
   public IPersistentMap handle(IPersistentMap request) {

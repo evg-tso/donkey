@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,15 @@ package com.appsflyer.donkey.server.ring.handler;
 import com.appsflyer.donkey.server.handler.*;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RingAdapterFactory implements AdapterFactory {
   
   public static AdapterFactory create() {
     return new RingAdapterFactory();
   }
-  
-  private RingAdapterFactory() {}
   
   @Override
   public Handler<RoutingContext> requestAdapter() {
@@ -38,5 +39,4 @@ public final class RingAdapterFactory implements AdapterFactory {
   public Handler<RoutingContext> responseAdapter() {
     return RingResponseAdapter.create();
   }
-  
 }

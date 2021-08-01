@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -19,19 +19,17 @@ package com.appsflyer.donkey.server.handler;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class InternalServerErrorHandler implements Handler<RoutingContext> {
-  
-  private static final Logger logger = LoggerFactory.getLogger(
-      InternalServerErrorHandler.class.getName());
   
   public static InternalServerErrorHandler create() {
     return new InternalServerErrorHandler();
   }
-  
-  private InternalServerErrorHandler() {}
   
   @Override
   public void handle(RoutingContext ctx) {

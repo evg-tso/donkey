@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -42,22 +42,26 @@ public final class RingClient implements Client<IPersistentMap, IPersistentMap> 
     requestFactory = RingRequestFactory.create(client);
   }
   
+  @Override
   public HttpRequest<Buffer> request(IPersistentMap opts) {
     return requestFactory.create(opts);
   }
   
+  @Override
   public Future<IPersistentMap> send(HttpRequest<Buffer> request) {
     Promise<IPersistentMap> promise = Promise.promise();
     request.send(RingResponseAdapter.create(promise));
     return promise.future();
   }
   
+  @Override
   public Future<IPersistentMap> send(HttpRequest<Buffer> request, Buffer body) {
     Promise<IPersistentMap> promise = Promise.promise();
     request.sendBuffer(body, RingResponseAdapter.create(promise));
     return promise.future();
   }
   
+  @Override
   public Future<IPersistentMap> sendForm(HttpRequest<Buffer> request, MultiMap body) {
     Promise<IPersistentMap> promise = Promise.promise();
     //Required to avoid NPE. See: https://github.com/vert-x3/vertx-web/issues/1832
@@ -66,6 +70,7 @@ public final class RingClient implements Client<IPersistentMap, IPersistentMap> 
     return promise.future();
   }
   
+  @Override
   public Future<IPersistentMap> sendMultiPartForm(HttpRequest<Buffer> request, MultipartForm body) {
     Promise<IPersistentMap> promise = Promise.promise();
     //Required to avoid NPE. See: https://github.com/vert-x3/vertx-web/issues/1832
@@ -73,8 +78,8 @@ public final class RingClient implements Client<IPersistentMap, IPersistentMap> 
     return promise.future();
   }
   
+  @Override
   public void shutdown() {
     client.close();
   }
-  
 }

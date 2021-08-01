@@ -29,6 +29,7 @@
 (def ^:private ^:const ring-core-version "1.8.2")
 (def ^:private ^:const ring-json-version "0.5.0")
 (def ^:private ^:const criterium-version "0.4.6")
+(def ^:private ^:const lombok-version "1.18.20")
 
 (defproject com.appsflyer/donkey "0.5.2-SNAPSHOT"
   :description "Clojure Server and Client"
@@ -57,7 +58,8 @@
                                           [io.vertx/vertx-junit5 ~vertx-version]
                                           [org.hamcrest/hamcrest-library ~hamcrest-version]
                                           [org.junit.jupiter/junit-jupiter ~junit-version]
-                                          [org.mockito/mockito-junit-jupiter ~mockito-version]]
+                                          [org.mockito/mockito-junit-jupiter ~mockito-version]
+                                          [org.projectlombok/lombok ~lombok-version]]
                          :resource-paths ["src/test/resources"]
                          :plugins        [[lein-kibit "0.1.8"]
                                           [lein-cloverage "1.1.2"]]}

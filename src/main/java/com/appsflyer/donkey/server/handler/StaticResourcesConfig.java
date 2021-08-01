@@ -17,17 +17,16 @@
 
 package com.appsflyer.donkey.server.handler;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.experimental.Accessors;
+
 import java.time.Duration;
 import java.util.Objects;
 
+@Getter(AccessLevel.PACKAGE)
+@Accessors(fluent = true)
 public class StaticResourcesConfig {
-  
-  private String resourcesRoot;
-  private String indexPage;
-  private boolean enableCaching;
-  private Duration maxAge;
-  private Duration localCacheDuration;
-  private int localCacheSize;
   
   /**
    * The directory from which resources are served.
@@ -35,52 +34,40 @@ public class StaticResourcesConfig {
    * Most commonly it should be under the {@code resources} directory
    * Defaults to {@code webroot}
    */
-  String resourcesRoot() {
-    return resourcesRoot;
-  }
+  private String resourcesRoot;
   
   /**
    * The file to serve when a directory is requested.
    * Defaults to index.html
    */
-  String indexPage() {
-    return indexPage;
-  }
+  private String indexPage;
   
   /**
    * When caching is not enabled, then the server doesn't handle any of
-   * the caching directive in the request (i.e Cache-Control header).
+   * the caching directive in the request (i.e. Cache-Control header).
    */
-  boolean enableCaching() {
-    return enableCaching;
-  }
+  private boolean enableCaching;
   
   /**
    * The duration of time to tell a client to cache a resource.
    * Corresponds to the `max-age` directive of the Cache-Control header.
    * Ignored when caching is disabled.
    */
-  Duration maxAge() {
-    return maxAge;
-  }
+  private Duration maxAge;
   
   /**
-   * The handler keeps a local cache of file properties so it doesn't need to
+   * The handler keeps a local cache of file properties, so it doesn't need to
    * access the filesystem on every request. This setting determines when an
    * entry becomes stale and the handler should invalidate the entry.
    * The best value depends on how frequently the assets change.
    * The duration is measured from the time the entry was added to the cache.
    */
-  Duration localCacheDuration() {
-    return localCacheDuration;
-  }
+  private Duration localCacheDuration;
   
   /**
    * The maximum number of items to store in the file properties cache
    */
-  int localCacheSize() {
-    return localCacheSize;
-  }
+  private int localCacheSize;
   
   public static class Builder {
     

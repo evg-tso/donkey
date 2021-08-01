@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,9 @@
 
 package com.appsflyer.donkey.log;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -28,6 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * programmatically during a debug session.
  * It relies on <a href="http://logback.qos.ch/">Logback</a> to be in the classpath.
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class LogbackLoggerFactory {
   
   private static volatile LogDelegateFactory delegateFactory;
@@ -37,8 +41,6 @@ public final class LogbackLoggerFactory {
   static {
     initialize();
   }
-  
-  private LogbackLoggerFactory() {}
   
   private static void initialize() {
     ClassLoader loader = Thread.currentThread().getContextClassLoader();

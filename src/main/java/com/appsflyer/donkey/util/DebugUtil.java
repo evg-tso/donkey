@@ -18,6 +18,8 @@
 package com.appsflyer.donkey.util;
 
 import com.appsflyer.donkey.log.LogbackLoggerFactory;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 
 import java.util.HashMap;
@@ -28,6 +30,7 @@ import java.util.function.Supplier;
 import static io.netty.util.ResourceLeakDetector.Level.ADVANCED;
 import static io.netty.util.ResourceLeakDetector.Level.DISABLED;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DebugUtil {
   
   private static final String LOGBACK_LOGGER_FQCN = "ch.qos.logback.classic.Logger";
@@ -41,9 +44,6 @@ public final class DebugUtil {
   private static final String LOGGER_NETTY = "io.netty";
   private static final String LOGGER_VERTX = "io.vertx";
   private static final String LOGGER_APPSFLYER = "com.appsflyer";
-  
-  
-  private DebugUtil() {}
   
   public static void enable() {
     enableDebugLogging();

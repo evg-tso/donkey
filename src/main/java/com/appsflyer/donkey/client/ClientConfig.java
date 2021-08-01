@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -19,58 +19,17 @@ package com.appsflyer.donkey.client;
 
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.client.WebClientOptions;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 
-import java.util.Objects;
-
+@Builder
+@Getter
+@Accessors(fluent = true)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ClientConfig {
-  
-  public static ClientConfigBuilder builder() {
-    return new ClientConfigBuilder();
-  }
-  
   private Vertx vertx;
   private WebClientOptions clientOptions;
-  
-  private ClientConfig() {}
-  
-  public Vertx vertx() {
-    return vertx;
-  }
-  
-  public WebClientOptions clientOptions() {
-    return clientOptions;
-  }
-  
-  public static final class ClientConfigBuilder {
-    
-    private ClientConfig instance;
-    
-    private ClientConfigBuilder() {
-      instance = new ClientConfig();
-    }
-    
-    public ClientConfigBuilder vertx(Vertx vertx) {
-      Objects.requireNonNull(vertx, "Vertx argument cannot be null");
-      instance.vertx = vertx;
-      return this;
-    }
-    
-    public ClientConfigBuilder clientOptions(WebClientOptions clientOptions) {
-      Objects.requireNonNull(clientOptions, "Client options argument cannot be null");
-      instance.clientOptions = clientOptions;
-      return this;
-    }
-    
-    public ClientConfig build() {
-      assertValidState();
-      var res = instance;
-      instance = null;
-      return res;
-    }
-    
-    private void assertValidState() {
-      Objects.requireNonNull(instance.vertx, "Vertx field is missing");
-      Objects.requireNonNull(instance.clientOptions, "Client options field is missing");
-    }
-  }
 }

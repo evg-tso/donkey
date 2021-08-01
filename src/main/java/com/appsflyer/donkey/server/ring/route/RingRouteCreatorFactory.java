@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,15 @@ import com.appsflyer.donkey.server.route.AbstractRouteCreator;
 import com.appsflyer.donkey.server.route.RouteCreatorFactory;
 import com.appsflyer.donkey.server.route.RouteList;
 import io.vertx.ext.web.Router;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RingRouteCreatorFactory implements RouteCreatorFactory {
   
   public static RouteCreatorFactory create() {
     return new RingRouteCreatorFactory();
   }
-  
-  private RingRouteCreatorFactory() {}
   
   @Override
   public AbstractRouteCreator newInstance(Router router, RouteList routeList) {

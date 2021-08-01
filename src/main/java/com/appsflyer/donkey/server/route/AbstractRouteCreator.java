@@ -63,7 +63,6 @@ public abstract class AbstractRouteCreator implements RouteCreator {
   
   protected abstract void buildRoute(Route route, RouteDefinition rd);
   
-  
   @Override
   public void setPath(Route route, RouteDefinition rd) {
     if (rd.path() != null) {

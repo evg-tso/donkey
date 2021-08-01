@@ -95,6 +95,7 @@
         <ring-json.version>0.5.0</ring-json.version>
         <criterium.version>0.4.6</criterium.version>
         <jetbrains.version>20.1.0</jetbrains.version>
+        <lombok.version>1.18.20</lombok.version>
     </properties>
 
     <dependencies>
@@ -208,6 +209,12 @@
             <groupId>ring</groupId>
             <artifactId>ring-json</artifactId>
             <version>${ring-json.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ import io.vertx.core.Handler;
 import io.vertx.core.Promise;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.ext.web.client.HttpResponse;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
 import static com.appsflyer.donkey.util.TypeConverter.toPersistentMap;
 
@@ -32,6 +34,7 @@ import static com.appsflyer.donkey.util.TypeConverter.toPersistentMap;
  * <p></p>
  * See the Ring <a href="https://github.com/ring-clojure/ring/blob/master/SPEC">specification</a> for more details.
  */
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RingResponseAdapter implements Handler<AsyncResult<HttpResponse<Buffer>>> {
   
   public static RingResponseAdapter create(Promise<IPersistentMap> promise) {
@@ -39,10 +42,6 @@ public final class RingResponseAdapter implements Handler<AsyncResult<HttpRespon
   }
   
   private final Promise<IPersistentMap> promise;
-  
-  private RingResponseAdapter(Promise<IPersistentMap> promise) {
-    this.promise = promise;
-  }
   
   @Override
   public void handle(AsyncResult<HttpResponse<Buffer>> event) {
@@ -60,6 +59,7 @@ public final class RingResponseAdapter implements Handler<AsyncResult<HttpRespon
           valueIndex += 2;
         }
       }
+      
       if (valueIndex == values.length) {
         promise.complete(toPersistentMap(values));
       } else {
@@ -67,7 +67,6 @@ public final class RingResponseAdapter implements Handler<AsyncResult<HttpRespon
         System.arraycopy(values, 0, copy, 0, valueIndex);
         promise.complete(toPersistentMap(copy));
       }
-      
     } else {
       promise.fail(event.cause());
     }

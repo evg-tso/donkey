@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,8 @@ import clojure.lang.IPersistentMap;
 import clojure.lang.Keyword;
 import clojure.lang.RT;
 import io.netty.handler.codec.http.QueryStringDecoder;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 import java.util.Map;
@@ -32,19 +34,15 @@ import static com.appsflyer.donkey.util.TypeConverter.toVector;
 
 public final class QueryParamsParser implements RingMiddleware {
   
+  @NoArgsConstructor()
+  @Setter
+  @Accessors(fluent = true)
   public static class Options {
-    
-    private static final Options DEFAULT = new Options();
     private boolean keywordizeKeys;
-    
-    public Options keywordizeKeys(boolean keywordizeKeys) {
-      this.keywordizeKeys = keywordizeKeys;
-      return this;
-    }
   }
   
   public static RingMiddleware create() {
-    return new QueryParamsParser(Options.DEFAULT);
+    return new QueryParamsParser(new Options());
   }
   
   public static RingMiddleware create(Options opts) {

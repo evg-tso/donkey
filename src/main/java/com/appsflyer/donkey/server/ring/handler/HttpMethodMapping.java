@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 AppsFlyer
+ * Copyright 2020-2021 AppsFlyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,14 @@ package com.appsflyer.donkey.server.ring.handler;
 
 import clojure.lang.Keyword;
 import io.vertx.core.http.HttpMethod;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class HttpMethodMapping {
   
   private static final Map<HttpMethod, Keyword> enumToKeyword = new HashMap<>();
@@ -36,8 +39,6 @@ public final class HttpMethodMapping {
       keywordToEnum.put(keyword, method);
     }
   }
-  
-  private HttpMethodMapping() {}
   
   public static Keyword get(HttpMethod method) {
     return enumToKeyword.get(method);
