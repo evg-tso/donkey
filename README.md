@@ -74,6 +74,7 @@ Including the library in `pom.xml`
 - [Java](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
   11+
 - [Maven](http://maven.apache.org/download.cgi) 3.6.3+
+- [Clojure](https://clojure.org/releases/downloads_older) 1.10.1+
 - [Leiningen](https://leiningen.org/) 2.9.3+
 
 ### Building
